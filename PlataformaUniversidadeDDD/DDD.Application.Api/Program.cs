@@ -1,3 +1,4 @@
+using DDD.Application.Service;
 using DDD.Domain.Service;
 using DDD.Infra.SQLServer;
 using DDD.Infra.SQLServer.Interfaces;
@@ -13,7 +14,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IAlunoRepository, AlunoRepositorySqlServer>();
 builder.Services.AddScoped<IDisciplinaRepository, DisciplinaRepositorySqlServer>();
 builder.Services.AddScoped<IMatriculaRepository, MatriculaRepositorySqlServer>();
-builder.Services.AddScoped<MatriculaService, MatriculaService>();
+builder.Services.AddScoped<BoletimService, BoletimService>();
+builder.Services.AddScoped<ApplicationServiceBoletim, ApplicationServiceBoletim>();
 builder.Services.AddScoped<SqlContext, SqlContext>();
 
 builder.Services.AddControllers().AddJsonOptions(x =>

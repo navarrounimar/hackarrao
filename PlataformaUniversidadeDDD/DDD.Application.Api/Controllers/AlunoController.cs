@@ -1,3 +1,4 @@
+using DDD.Application.Service;
 using DDD.Domain.SecretariaContext;
 using DDD.Infra.SQLServer.Interfaces;
 using Microsoft.AspNetCore.Http;
@@ -10,10 +11,12 @@ namespace DDD.Application.Api.Controllers
     public class AlunoController : ControllerBase
     {
         readonly IAlunoRepository _alunoRepository;
+        readonly ApplicationServiceBoletim  _boletimService;
 
-        public AlunoController(IAlunoRepository alunoRepository)
+        public AlunoController(IAlunoRepository alunoRepository, ApplicationServiceBoletim applicationServiceBoletim)
         {
             _alunoRepository = alunoRepository;
+            _boletimService= applicationServiceBoletim;
         }
 
         // GET: api/<AlunosController>
@@ -27,6 +30,13 @@ namespace DDD.Application.Api.Controllers
         public ActionResult<Aluno> GetById(int id)
         {
             return Ok(_alunoRepository.GetAlunoById(id));
+        }
+
+        [HttpPost]
+        [Route("gerarBoletim")]
+        public void EfetuarMatriculaApplicationService(List<DisciplinaNota> disciplinaNotas, int idAluno)
+        {
+            _boletimService.GerarBoletim(disciplinaNotas.ToList(), idAluno);
         }
 
         [HttpPost]

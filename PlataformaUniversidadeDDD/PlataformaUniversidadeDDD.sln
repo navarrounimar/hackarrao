@@ -19,9 +19,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDD.Application.Api", "DDD.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDD.Infra.SQLServer", "DDD.Infra.SQLServer\DDD.Infra.SQLServer.csproj", "{24CF457D-22E0-4C94-83C6-BDA05EB6402B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDD.Domain.Service", "DDD.Domain.Service\DDD.Domain.Service.csproj", "{E62D1D5E-45E5-423C-9EB3-BC89F777FF54}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDD.Domain.Service", "DDD.Domain.Service\DDD.Domain.Service.csproj", "{E62D1D5E-45E5-423C-9EB3-BC89F777FF54}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDD.Application.Service", "DDD.Application.Service\DDD.Application.Service.csproj", "{22C79F31-EC1A-4060-89AE-4B99B04C7E31}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDD.Application.Service", "DDD.Application.Service\DDD.Application.Service.csproj", "{22C79F31-EC1A-4060-89AE-4B99B04C7E31}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Test", "5 - Test", "{BE3C0E51-5CAC-4100-8C05-D1C02AE5A26D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject", "TestProject\TestProject.csproj", "{2F38952B-6543-4301-9ED8-0E8BC5079792}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +57,10 @@ Global
 		{22C79F31-EC1A-4060-89AE-4B99B04C7E31}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22C79F31-EC1A-4060-89AE-4B99B04C7E31}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22C79F31-EC1A-4060-89AE-4B99B04C7E31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F38952B-6543-4301-9ED8-0E8BC5079792}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F38952B-6543-4301-9ED8-0E8BC5079792}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F38952B-6543-4301-9ED8-0E8BC5079792}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F38952B-6543-4301-9ED8-0E8BC5079792}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +72,7 @@ Global
 		{24CF457D-22E0-4C94-83C6-BDA05EB6402B} = {553EC664-4908-4C13-8B99-A475D56E0F37}
 		{E62D1D5E-45E5-423C-9EB3-BC89F777FF54} = {0B4B52A9-8E58-4FC4-8F6F-C10486E78F68}
 		{22C79F31-EC1A-4060-89AE-4B99B04C7E31} = {982DD866-6E88-478F-8622-E640AB673C59}
+		{2F38952B-6543-4301-9ED8-0E8BC5079792} = {BE3C0E51-5CAC-4100-8C05-D1C02AE5A26D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D406562A-4848-4D7B-8CA2-F5911E069D40}

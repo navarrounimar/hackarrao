@@ -8,6 +8,6 @@ namespace DDD.Domain.SecretariaContext
 {
     public class Boletim
     {
-
+        public Dictionary<int, Decimal> Notas { get; set; }
     }
 }

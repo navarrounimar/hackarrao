@@ -33,6 +33,12 @@ namespace DDD.Infra.SQLServer.Repositories
             throw new NotImplementedException();
         }
 
+        public List<Matricula> GetMatriculasPorAluno(Aluno aluno)
+        {
+            var matriculasAluno = _context.Matriculas.Where(x => x.Aluno == aluno).ToList();
+            return matriculasAluno;
+        }
+
         public Matricula InsertMatricula(int idAluno, int idDisciplina)
         {
             var aluno = _context.Alunos .First(i => i.UserId == idAluno);

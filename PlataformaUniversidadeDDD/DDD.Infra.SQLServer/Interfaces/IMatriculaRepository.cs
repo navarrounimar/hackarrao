@@ -10,6 +10,7 @@ namespace DDD.Infra.SQLServer.Interfaces
     public interface IMatriculaRepository
     {
         public List<Matricula> GetMatriculas();
+        public List<Matricula> GetMatriculasPorAluno(Aluno aluno);
         public Matricula GetMatriculaById(int id);
         //public void InsertMatricula(Matricula matricula);
         public Matricula InsertMatricula(int idAluno, int idDisciplina);
