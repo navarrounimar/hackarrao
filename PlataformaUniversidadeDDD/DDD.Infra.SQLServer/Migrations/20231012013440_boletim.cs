@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DDD.Infra.SQLServer.Migrations
 {
     /// <inheritdoc />
-    public partial class matriculasemAlunoId : Migration
+    public partial class boletim : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -68,6 +68,27 @@ namespace DDD.Infra.SQLServer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Boletins",
+                columns: table => new
+                {
+                    BoletimPersistenceId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AlunoUserId = table.Column<int>(type: "int", nullable: false),
+                    DisciplinaId = table.Column<int>(type: "int", nullable: false),
+                    Nota = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Boletins", x => x.BoletimPersistenceId);
+                    table.ForeignKey(
+                        name: "FK_Boletins_Aluno_AlunoUserId",
+                        column: x => x.AlunoUserId,
+                        principalTable: "Aluno",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Matriculas",
                 columns: table => new
                 {
@@ -116,6 +137,11 @@ namespace DDD.Infra.SQLServer.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Boletins_AlunoUserId",
+                table: "Boletins",
+                column: "AlunoUserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Matriculas_AlunoId",
                 table: "Matriculas",
                 column: "AlunoId");
@@ -134,6 +160,9 @@ namespace DDD.Infra.SQLServer.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Boletins");
+
             migrationBuilder.DropTable(
                 name: "Matriculas");
 

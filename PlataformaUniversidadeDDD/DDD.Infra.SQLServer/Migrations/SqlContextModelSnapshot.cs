@@ -53,6 +53,30 @@ namespace DDD.Infra.SQLServer.Migrations
                     b.ToTable("Projetos");
                 });
 
+            modelBuilder.Entity("DDD.Domain.SecretariaContext.BoletimPersistence", b =>
+                {
+                    b.Property<int>("BoletimPersistenceId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BoletimPersistenceId"));
+
+                    b.Property<int>("AlunoUserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DisciplinaId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Nota")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("BoletimPersistenceId");
+
+                    b.HasIndex("AlunoUserId");
+
+                    b.ToTable("Boletins");
+                });
+
             modelBuilder.Entity("DDD.Domain.SecretariaContext.Disciplina", b =>
                 {
                     b.Property<int>("DisciplinaId")
@@ -170,6 +194,17 @@ namespace DDD.Infra.SQLServer.Migrations
                     b.HasOne("DDD.Domain.PicContext.Pesquisador", null)
                         .WithMany("Projetos")
                         .HasForeignKey("PesquisadorUserId");
+                });
+
+            modelBuilder.Entity("DDD.Domain.SecretariaContext.BoletimPersistence", b =>
+                {
+                    b.HasOne("DDD.Domain.SecretariaContext.Aluno", "Aluno")
+                        .WithMany()
+                        .HasForeignKey("AlunoUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Aluno");
                 });
 
             modelBuilder.Entity("DDD.Domain.SecretariaContext.Matricula", b =>

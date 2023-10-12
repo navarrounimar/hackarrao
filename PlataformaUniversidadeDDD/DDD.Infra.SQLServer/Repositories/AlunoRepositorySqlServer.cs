@@ -59,6 +59,20 @@ namespace DDD.Infra.SQLServer.Repositories
             }
         }
 
+        public void PersistirBoletim(BoletimPersistence boletimPersistence)
+        {
+            try
+            {
+                _context.Boletins.Add(boletimPersistence);
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                //log exception
+
+            }
+        }
+
         public void UpdateAluno(Aluno aluno)
         {
             try

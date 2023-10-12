@@ -31,6 +31,7 @@ namespace DDD.Infra.SQLServer
             //https://learn.microsoft.com/pt-br/ef/core/modeling/inheritance
         }
 
+        public DbSet<BoletimPersistence> Boletins { get; set; }
         public DbSet<Aluno> Alunos { get; set; }
         public DbSet<Disciplina> Disciplinas { get; set; }
         public DbSet<Matricula> Matriculas { get; set; }
