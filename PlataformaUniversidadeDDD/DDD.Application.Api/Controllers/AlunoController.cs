@@ -26,6 +26,8 @@ namespace DDD.Application.Api.Controllers
             return Ok(_alunoRepository.GetAlunos());
         }
 
+
+
         [HttpGet("{id}")]
         public ActionResult<Aluno> GetById(int id)
         {
