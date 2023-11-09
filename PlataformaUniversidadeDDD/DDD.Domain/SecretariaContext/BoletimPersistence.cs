@@ -10,7 +10,7 @@ namespace DDD.Domain.SecretariaContext
     public class BoletimPersistence
     {
         public int BoletimPersistenceId { get; set; }
-        public Aluno Aluno { get; set; }
+        public int AlunoId { get; set; }
         public int DisciplinaId { get; set; }
         
         [Column(TypeName = "decimal(18,2)")]

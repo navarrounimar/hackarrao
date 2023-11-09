@@ -22,8 +22,9 @@ namespace DDD.Application.Service
 
         public void EnviarRelatorio(List<string> emails, bool EAD)
         {
+            //_relatorioService.BuscarAlunosDestaque(EAD);
 
-            var listaDeAlunos = _boletimService.GerarBoletim(disciplinaNotas, idAluno);
+            var listaDeAlunos = _relatorioService.BuscarAlunosDestaque(EAD);
             if (listaDeAlunos is not null)
             {
                 //Enviar email

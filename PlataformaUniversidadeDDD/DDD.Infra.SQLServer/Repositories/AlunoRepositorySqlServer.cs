@@ -73,6 +73,12 @@ namespace DDD.Infra.SQLServer.Repositories
             }
         }
 
+        public List<BoletimPersistence> GetBoletins()
+        {
+            return _context.Boletins.ToList();
+        }
+
+
         public void UpdateAluno(Aluno aluno)
         {
             try

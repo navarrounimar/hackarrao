@@ -15,5 +15,6 @@ namespace DDD.Infra.SQLServer.Interfaces
         public void UpdateAluno(Aluno aluno);
         public void DeleteAluno(Aluno aluno);
         public void PersistirBoletim(BoletimPersistence boletimPersistence);
+        public List<BoletimPersistence> GetBoletins();
     }
 }

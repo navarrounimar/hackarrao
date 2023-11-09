@@ -4,56 +4,48 @@ using DDD.Infra.SQLServer.Interfaces;
 namespace DDD.Domain.Service
 {
     /// <summary>
-    /// Classe responsável para tratamentos com Boletim.
-    /// Para gerar um boletim, o aluno deve estar devidamente matriculado na disciplina
+    /// Classe responsável por buscar os alunos com notas de destaque.
     /// </summary>
-    public class BoletimService
+    public class RelatorioNotasDestaqueService
     {
         readonly IMatriculaRepository _matriculaRepository;
         readonly IAlunoRepository _alunoRepository;
+        readonly IDisciplinaRepository _disciplinaRepository;
 
-        public BoletimService(IMatriculaRepository matriculaRepository, IAlunoRepository alunoRepository)
+        public RelatorioNotasDestaqueService(IMatriculaRepository matriculaRepository,
+            IAlunoRepository alunoRepository, IDisciplinaRepository disciplinaRepository)
         {
             _matriculaRepository = matriculaRepository;
             _alunoRepository = alunoRepository;
+            _disciplinaRepository = disciplinaRepository;
         }
 
-
-
         /// <summary>
-        /// Ao gerar o boletim devemos fazer um check para verificar
-        /// se cada uma das disciplinas a serem geradas no boletim
-        /// de fato está vinculada para aquele aluno e Disponível 
-        /// </summary>
-        /// <param name="disciplinaNotas"></param>
+        /// busca alunos com notas acima de 8 (inclusive)
         /// <returns></returns>
-        public bool GerarBoletim(List<DisciplinaNota> disciplinaNotas, int idAluno)
+        public List<string> BuscarAlunosDestaque(bool EAD)
         {
+            List<string> emailsAlunos = new List<string>();
             try
             {
-                Boletim boletim = new Boletim();
-                boletim.Notas = new Dictionary<int, decimal>();
-                var aluno = _alunoRepository.GetAlunoById(idAluno);
-                var disciplinasMatriculadas = _matriculaRepository.GetMatriculasPorAluno(aluno);
-                BoletimPersistence boletimPersistence = new BoletimPersistence();
 
-                foreach (var item in disciplinaNotas)
+                var disciplinasEAD = _disciplinaRepository.GetDisciplinas().Where(x => x.Ead == EAD).ToList();
+                var boletins = _alunoRepository.GetBoletins();
+
+                var boletinsDisciplinaEad = (from b in boletins where 
+                                             disciplinasEAD.Any(x => x.DisciplinaId == b.DisciplinaId && b.Nota >= 8) select b)
+                                             .ToList();
+
+                //var teste = boletinsDisciplinaEad.Where(f1 => _alunoRepository.GetAlunos().ToList().Any(f2 => f2.UserId == f1.Aluno.UserId)).ToList();
+
+                foreach (var item in boletinsDisciplinaEad)
                 {
-                    var teste = disciplinasMatriculadas.FirstOrDefault(x => x.DisciplinaId == item.IdDisciplina);
-                    if (teste != null)
-                    {
-                        boletimPersistence.Aluno = aluno;
-                        boletimPersistence.DisciplinaId = item.IdDisciplina;
-                        boletimPersistence.Nota = item.Nota;
-                        //boletim.Notas.Add(item.IdDisciplina, item.Nota);
-                    }
-                    _alunoRepository.PersistirBoletim(boletimPersistence);
+                    var aluno = _alunoRepository.GetAlunos().ToList().Find(x => x.UserId == item.AlunoId);
+                    emailsAlunos.Add(aluno.Email);
                 }
 
 
-
-
-                return true;
+                return emailsAlunos;
             }
             catch (Exception ex)
             {

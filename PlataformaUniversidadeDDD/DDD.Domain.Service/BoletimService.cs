@@ -42,7 +42,7 @@ namespace DDD.Domain.Service
                     var teste = disciplinasMatriculadas.FirstOrDefault(x => x.DisciplinaId == item.IdDisciplina);
                     if (teste != null)
                     {
-                        boletimPersistence.Aluno = aluno;
+                        boletimPersistence.AlunoId = aluno.UserId;
                         boletimPersistence.DisciplinaId = item.IdDisciplina;
                         boletimPersistence.Nota = item.Nota;
                         //boletim.Notas.Add(item.IdDisciplina, item.Nota);
