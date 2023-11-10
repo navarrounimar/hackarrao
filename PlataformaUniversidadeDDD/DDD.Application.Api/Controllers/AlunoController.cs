@@ -12,15 +12,12 @@ namespace DDD.Application.Api.Controllers
     {
         readonly IAlunoRepository _alunoRepository;
         readonly ApplicationServiceBoletim  _boletimService;
-        readonly ApplicationServiceRelatorioNotasDestaque _relatorioNotasDestaque;
 
-        public AlunoController(IAlunoRepository alunoRepository, 
-            ApplicationServiceBoletim applicationServiceBoletim,
-            ApplicationServiceRelatorioNotasDestaque relatorioNotasDestaque)
+        public AlunoController(IAlunoRepository alunoRepository, ApplicationServiceBoletim applicationServiceBoletim)
         {
             _alunoRepository = alunoRepository;
             _boletimService = applicationServiceBoletim;
-            _relatorioNotasDestaque = relatorioNotasDestaque;
+
         }
 
         // GET: api/<AlunosController>
@@ -36,13 +33,6 @@ namespace DDD.Application.Api.Controllers
         public ActionResult<Aluno> GetById(int id)
         {
             return Ok(_alunoRepository.GetAlunoById(id));
-        }
-
-        [HttpPost]
-        [Route("gerarRelatorio")]
-        public void GerarRelatorioApplicationService(List<string> emails, bool Ead)
-        {
-            _relatorioNotasDestaque.EnviarRelatorio(emails, true);
         }
 
         [HttpPost]
