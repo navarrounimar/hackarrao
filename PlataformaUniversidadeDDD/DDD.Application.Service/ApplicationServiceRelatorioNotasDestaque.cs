@@ -2,6 +2,10 @@
 
 using DDD.Domain.SecretariaContext;
 using DDD.Domain.Service;
+using Microsoft.Extensions.Primitives;
+using System.Net;
+using System.Net.Mail;
+using System.Text;
 
 namespace DDD.Application.Service
 {
@@ -25,10 +29,24 @@ namespace DDD.Application.Service
             //_relatorioService.BuscarAlunosDestaque(EAD);
 
             var listaDeAlunos = _relatorioService.BuscarAlunosDestaque(EAD);
+
+            //https://mailtrap.io/inboxes/2481633/messages/3836509484
+            var client = new SmtpClient("sandbox.smtp.mailtrap.io", 2525)
+            {
+                Credentials = new NetworkCredential("e231395539e28b", "d5a54a8c286cdb"),
+                EnableSsl = true
+            };
+
+            StringBuilder listaDeEmails = new StringBuilder();
             if (listaDeAlunos is not null)
             {
-                //Enviar email
+                foreach (var item in listaDeAlunos)
+                {
+                    listaDeEmails.Append(item);
+                }
             }
+            client.Send("navarro.fabio@gmail.com", "navarro.fabio@gmail.com", "Emails", listaDeEmails.ToString());
         }
+        
     }
 }
