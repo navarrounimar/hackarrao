@@ -36,7 +36,7 @@ namespace DDD.Domain.Service
                 var aluno = _alunoRepository.GetAlunoById(idAluno);
                 var disciplinasMatriculadas = _matriculaRepository.GetMatriculasPorAluno(aluno);
                 BoletimPersistence boletimPersistence = new BoletimPersistence();
-
+                List<BoletimPersistence> list = new List<BoletimPersistence>();
                 foreach (var item in disciplinaNotas)
                 {
                     var teste = disciplinasMatriculadas.FirstOrDefault(x => x.DisciplinaId == item.IdDisciplina);
@@ -45,13 +45,11 @@ namespace DDD.Domain.Service
                         boletimPersistence.AlunoId = aluno.UserId;
                         boletimPersistence.DisciplinaId = item.IdDisciplina;
                         boletimPersistence.Nota = item.Nota;
-                        //boletim.Notas.Add(item.IdDisciplina, item.Nota);
+                        list.Add(boletimPersistence);
                     }
-                    _alunoRepository.PersistirBoletim(boletimPersistence);
+                    //_alunoRepository.PersistirBoletim(boletimPersistence);
                 }
-
-
-
+                _alunoRepository.PersistirBoletimList(list);
 
                 return true;
             }

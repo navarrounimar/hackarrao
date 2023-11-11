@@ -58,6 +58,19 @@ namespace DDD.Infra.SQLServer.Repositories
 
             }
         }
+        public void PersistirBoletimList(List<BoletimPersistence> boletimPersistences)
+        {
+            try
+            {
+                _context.Boletins.AddRange(boletimPersistences);
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                //log exception
+
+            }
+        }
 
         public void PersistirBoletim(BoletimPersistence boletimPersistence)
         {

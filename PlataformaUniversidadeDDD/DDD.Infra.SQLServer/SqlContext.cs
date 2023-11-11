@@ -24,7 +24,6 @@ namespace DDD.Infra.SQLServer
                 .WithMany(e => e.Alunos)
                 .UsingEntity<Matricula>();
 
-
             modelBuilder.Entity<User>().UseTpcMappingStrategy();
             modelBuilder.Entity<Aluno>().ToTable("Aluno");
             modelBuilder.Entity<Pesquisador>().ToTable("Pesquisador");
